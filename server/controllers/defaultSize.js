@@ -74,7 +74,7 @@ exports.updateDefaultSize = async (req, res) => {
 };
 
 //delete defaut size
-exports.deletedefaultSize = async (req, res) => {
+exports.deleteDefaultSize = async (req, res) => {
   try {
     const { id } = req.params;
     await defaultSize.findByIdAndDelete({ _id: id });

@@ -18,6 +18,24 @@ const { updateColor } = require("../controllers/updateColor");
 const { updateRaw } = require("../controllers/updateRaw");
 //const { updateVendor } = require("../controllers/updatevendor");
 const { updateVendorType } = require("../controllers/updateVendorType");
+const {
+  createCurrency,
+  getCurrency,
+  updateCurrency,
+  deleteCurrency,
+} = require("../controllers/currency");
+const {
+  createCountry,
+  getCountry,
+  updateCountry,
+  deleteCountry,
+} = require("../controllers/country");
+const {
+  createCurrency,
+  getCurrency,
+  updateCurrency,
+  deleteDefaultSize,
+} = require("../controllers/defaultSize");
 
 //Mapping
 router.post(
@@ -28,17 +46,21 @@ router.post(
 router.post("/addVendorType", createVendorType);
 router.post("/addRawMatrialCategory", createRaw);
 router.post("/addColor", createColor);
+router.post("/addCurrency", createCurrency);
 //router.get("/getvendor", getVendor);
 router.get("/getRawMaterialCategory", getRaw);
 router.get("/getColor", getColor);
 router.get("/getVendorType", getVendorType);
+router.get("/getCurrency", getCurrency);
 //router.delete("/deleteVendor/:id", deleteVendor);
 router.delete("/deleteColor/:id", deleteColor);
 router.delete("/deleteRawMaterialCategory/:id", deleteRaw);
 router.delete("/deleteVendorType/:id", deleteVendorType);
+router.delete("/deleteCurrency/:id", deleteCurrency);
 //router.put("/updateVendor/:id", updateVendor);
 router.put("/updateColor/:id", updateColor);
 router.put("/updateRawMaterialCategory/:id", updateRaw);
 router.put("/updateVendorType/:id", updateVendorType);
+router.put("/updateCurrency", updateCurrency);
 
 module.exports = router;
