@@ -3,7 +3,16 @@ const Color = require("../models/color");
 exports.deleteColor = async (req, res) => {
   try {
     const { id } = req.params;
-    await Color.findByIdAndDelete({ _id: id });
+    dltd = await Color.findByIdAndDelete({ _id: id });
+
+    if (!dltd) {
+      res.status(400).json({
+        success: false,
+        message: `Data with id:${id} not found`,
+      });
+      return;
+    }
+
     res.status(200).json({
       success: true,
       message: "Color data deleted succesfully",

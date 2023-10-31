@@ -3,7 +3,16 @@ const VendorType = require("../models/vendorType");
 exports.deleteVendorType = async (req, res) => {
   try {
     const { id } = req.params;
-    await VendorType.findByIdAndDelete({ _id: id });
+    dltd = await VendorType.findByIdAndDelete({ _id: id });
+
+    if (!dltd) {
+      res.status(400).json({
+        success: false,
+        message: `Data with id:${id} not found`,
+      });
+      return;
+    }
+
     res.status(200).json({
       success: true,
       message: "Vendor type data deleted succesfully",

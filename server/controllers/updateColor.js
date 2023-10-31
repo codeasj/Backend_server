@@ -8,6 +8,15 @@ exports.updateColor = async (req, res) => {
       { _id: id },
       { name, status, createdAt: Date.now(), createdBy }
     );
+
+    if (!colors) {
+      res.status(400).json({
+        success: false,
+        message: `Data with id:${id} not found`,
+      });
+      return;
+    }
+
     res.status(200).json({
       success: true,
       data: colors,

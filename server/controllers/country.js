@@ -50,7 +50,7 @@ exports.updateCountry = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, createdBy } = req.body;
-    const cntry = await Currency.findByIdAndUpdate(
+    const cntry = await Country.findByIdAndUpdate(
       { _id: id },
       {
         name,
@@ -58,6 +58,15 @@ exports.updateCountry = async (req, res) => {
         createdBy,
       }
     );
+
+    if (!cntry) {
+      res.status(400).json({
+        success: false,
+        message: `Data with id:${id} not found`,
+      });
+      return;
+    }
+
     res.status(200).json({
       success: true,
       data: cntry,
@@ -74,10 +83,19 @@ exports.updateCountry = async (req, res) => {
 };
 
 //delete country
-exports.deleteCurrency = async (req, res) => {
+exports.deleteCountry = async (req, res) => {
   try {
     const { id } = req.params;
-    await Country.findByIdAndDelete({ _id: id });
+    dltd = await Country.findByIdAndDelete({ _id: id });
+
+    if (!dltd) {
+      res.status(400).json({
+        success: false,
+        message: `Data with id:${id} not found`,
+      });
+      return;
+    }
+
     res.status(200).json({
       success: true,
       message: "Country data deleted succesfully",

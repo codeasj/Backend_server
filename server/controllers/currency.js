@@ -1,5 +1,4 @@
 const Currency = require("../models/currency");
-const Customer = require("../models/customer");
 
 //add currency
 exports.createCurrency = async (req, res) => {
@@ -65,6 +64,14 @@ exports.updateCurrency = async (req, res) => {
       }
     );
 
+    if (!crncy) {
+      res.status(400).json({
+        success: false,
+        message: `Data with id:${id} not found`,
+      });
+      return;
+    }
+
     res.status(200).json({
       success: true,
       data: crncy,
@@ -84,7 +91,16 @@ exports.updateCurrency = async (req, res) => {
 exports.deleteCurrency = async (req, res) => {
   try {
     const { id } = req.params;
-    await Currency.findByIdAndDelete({ _id: id });
+
+    dltd = await Currency.findByIdAndDelete({ _id: id });
+
+    if (!dltd) {
+      res.status(400).json({
+        success: false,
+        message: `Data with id:${id} not found`,
+      });
+      return;
+    }
 
     res.status(200).json({
       success: true,

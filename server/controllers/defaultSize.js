@@ -58,9 +58,18 @@ exports.updateDefaultSize = async (req, res) => {
         createdBy,
       }
     );
+
+    if (!dflt) {
+      res.status(400).json({
+        success: false,
+        message: `Data with id:${id} not found`,
+      });
+      return;
+    }
+
     res.status(200).json({
       success: true,
-      data: cntry,
+      data: dflt,
       message: "Entry updated succesfully",
     });
   } catch (err) {
@@ -77,10 +86,19 @@ exports.updateDefaultSize = async (req, res) => {
 exports.deleteDefaultSize = async (req, res) => {
   try {
     const { id } = req.params;
-    await defaultSize.findByIdAndDelete({ _id: id });
+    dltd = await defaultSize.findByIdAndDelete({ _id: id });
+
+    if (!dltd) {
+      res.status(400).json({
+        success: false,
+        message: `Data with id:${id} not found`,
+      });
+      return;
+    }
+
     res.status(200).json({
       success: true,
-      message: "Country data deleted succesfully",
+      message: "Default Size data deleted succesfully",
     });
   } catch (err) {
     console.error(err);

@@ -20,8 +20,8 @@ exports.createVendor = async (req, res) => {
       addedBy,
     } = req.body;
     // console.log({ body: req.body });
-     console.log(req.files);
-    const filename1 = req.files;
+    console.log(req.files);
+    const filename1 = req.file.filename1;
 
     //create a new vendor obj and insert in db
     const response = await Vendor.create({
